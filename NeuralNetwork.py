@@ -1,3 +1,6 @@
-"""hejsan din lille kanelbulle"""
-"""Snart är det lunch!"""
-"""Det har du rätt i! PS, du har en fet röv"""
+"""
+Fundamentals of Artificial Inteligence (5DV121)
+Martin Sjölund
+Fredrik Östlund
+2017-10-04
+"""
