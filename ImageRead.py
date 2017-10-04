@@ -10,3 +10,5 @@ class ImageRead:
     def __init__(self):
         pass
 
+
+    def readImage(self, file):
