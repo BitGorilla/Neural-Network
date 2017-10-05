@@ -14,28 +14,33 @@ class ImageRead:
 
 
     def readImage(self, file):
-        Image = namedtuple('Face', 'name, values, mood')
+        Image = namedtuple('Face', 'name values mood')
+        valueArray = []
+        trainingArray = []
 
-        w,h = 20,20
-        imageArray = [[0 for x in range(w)] for y in range(h)]
-
-        """https://stackoverflow.com/questions/9578580/skip-first-couple-of-lines-while-reading-lines-in-python-file"""
         image_file = open(file, 'r')
-        image_file = image_file.readlines()[6:]
+        next(image_file)
+        next(image_file)
+        next(image_file)
+        next(image_file)
+        next(image_file)
 
-        i = 0
-        for line in image_file:
-            Image.name = line
-            print(Image.name)
-            next(image_file)
-            row = line.split()
-            print row
+        try:
+            for line in image_file:
+                Image.name = line
+                print line
+                line = next(image_file)
 
-            for j in range(20):
-                imageArray[i][j] = row[j]
-            i += 1
-            Image.values = imageArray
-            next(image_file)
+                for x in range(20):
+                    print(x)
+                    valueArray.append(line.split())
+                    print line
+                    line = next(image_file)
 
-        file.close()
-        return Image
+                Image.values = valueArray
+                trainingArray.append(Image)
+        except StopIteration as ex:
+            pass
+
+        image_file.close()
+        return trainingArray

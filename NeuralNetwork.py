@@ -7,8 +7,9 @@ Fredrik Ostlund
 from ImageRead import ImageRead
 
 if __name__ == '__main__':
+    training = []
     imageRead = ImageRead()
-    training = imageRead.readImage('training.txt')
+    training.append(imageRead.readImage('training.txt'))
 
-    print training.name[1]
+    print training[1].name
 
