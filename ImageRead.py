@@ -19,14 +19,13 @@ class ImageRead:
         trainingArray = []
 
         image_file = open(file, 'r')
-        next(image_file)
-        next(image_file)
-        next(image_file)
-        next(image_file)
-        next(image_file)
 
         try:
             for line in image_file:
+                if line[0] == "#":
+                    continue
+
+
                 Image.name = line
                 print line
                 line = next(image_file)
