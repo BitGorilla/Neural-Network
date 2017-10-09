@@ -22,20 +22,18 @@ class ImageRead:
 
         try:
             for line in image_file:
-                if line[0] == "#":
+                if line[0] == "#" or not line:
                     continue
 
 
-                Image.name = line
-                print line
-                line = next(image_file)
-
-                for x in range(20):
-                    print(x)
-                    valueArray.append(line.split())
+                for x in range(21):
+                    if x == 0:
+                        Image.name = line
+                        line = next(image_file)
+                    else:
+                        valueArray.append(line.split())
+                        line = next(image_file)
                     print line
-                    line = next(image_file)
-
                 Image.values = valueArray
                 trainingArray.append(Image)
         except StopIteration as ex:
