@@ -26,7 +26,7 @@ class DirectedList:
             Returvärde: -
             Kommentarer: I boken heter denna funktion Empty.
         """
-        self._head= OneCell()
+        self._head = OneCell()
 
     def insert(self, position, obj):
         """
@@ -51,7 +51,7 @@ class DirectedList:
         """
         return self._head.inspectLink() is None
 
-    def inspect(self,position):
+    def inspect(self, position):
         """
             Syfte: Returnerar värdet som finns på angiven position
             Parametrar: position - En position i listan
@@ -62,7 +62,7 @@ class DirectedList:
             raise MethodNotDefinedForThisPositionError("Error in inspect")
         return position.inspectLink().inspectValue()
 
-    def isEnd(self,position):
+    def isEnd(self, position):
         """
             Syfte: Returnerar värdet true om den angivna positionen är listans sista
             Parametrar: position - En position i listan
@@ -80,7 +80,7 @@ class DirectedList:
         """
         return self._head
 
-    def next(self,position):
+    def next(self, position):
         """
             Syfte: Returnerar position efter den angivna positionen
             Parametrar: position - En position i listan
@@ -92,7 +92,7 @@ class DirectedList:
             raise MethodNotDefinedForThisPositionError("Error in next")
         return position.inspectLink()
 
-    def remove(self,position):
+    def remove(self, position):
         """
             Syfte: Tar bort elementet på den angivna positionen
             Parametrar: position - En position i listan

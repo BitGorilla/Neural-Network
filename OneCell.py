@@ -24,7 +24,7 @@ class OneCell:
         self._data = None
         self._link = None
 
-    def setValue(self,data):
+    def setValue(self, data):
         """
             Syfte: Sätter cellens värde till data
             Parametrar:
@@ -33,14 +33,14 @@ class OneCell:
         """
         self._data = data
 
-    def setLink(self,link):
+    def setLink(self, link):
         """
             Syfte: Sätter cellens länk till link
             Parametrar:
             Returvärde:
             Kommentarer:
         """
-        self._link =link
+        self._link = link
 
     def inspectValue(self):
         """

@@ -5,11 +5,11 @@ Fredrik Ostlund
 2017-10-04
 """
 from ImageRead import ImageRead
+from TableList import TableList
 
 if __name__ == '__main__':
-    training = []
+    training = TableList
     imageRead = ImageRead()
-    training.append(imageRead.readImage('training.txt'))
+    training = imageRead.readImage('training.txt')
 
-    print training[1].name
-
+    print training.lookup("Image1")
