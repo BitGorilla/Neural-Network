@@ -6,8 +6,20 @@ Fredrik Ostlund
 """
 from ImageRead import ImageRead
 
+
+def loopDict(training):
+
+    for x in range(200):
+        string = "Image" + str(x+1)
+
+        for i in range(20):
+            for j in range(20):
+                if training.get(string)[i][j] > 8:
+                    """activate"""
+
+
 if __name__ == '__main__':
     imageRead = ImageRead()
     training = imageRead.readImage('training.txt')
 
-    print training.get('Image1')
+    loopDict(training)

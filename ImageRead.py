@@ -31,25 +31,26 @@ class ImageRead:
             i = 0
             for line in image_file:
                 if line[0] == "#" or not line.strip():
-                    print "comment or empty line"
+                    #print "comment or empty line"
                     if i > 0:
-                        print "i>0, insert to dict"
+                        #print "i>0, insert to dict"
                         imageDict[string] = valueArray
-                        print "insert complete"
+                        valueArray = []
+                        #print "insert complete"
                     i = 0
                     continue
 
                 """saves the image name and the 20 lines of image values"""
                 if i is 0:
                     string = line
-                    string = string[:-2]
-                    print "Name is", string
+                    string = string.rstrip('\n')
+                    #print "Name is", string
                     i += 1
                 else:
-                    print "put line in valueArray"
+                    #print "put line in valueArray"
                     valueArray.append(line.split())
 
-                print line
+                #print line
 
         except StopIteration as ex:
             pass
