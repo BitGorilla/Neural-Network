@@ -31,23 +31,27 @@ class ImageRead:
         image_file = open(file, 'r')
 
         try:
+            i = 0
             for line in image_file:
-                if line[0] == "#" or not line:
+                if line[0] == "#" or not line.strip():
+                    print "comment or empty line"
+                    if i > 0:
+                        print "i>0, insert to table"
+                        imageTable.insert(string, valueArray)
+                        print "insert complete"
+                    i = 0
                     continue
 
                 """saves the image name and the 20 lines of image values"""
-                for x in range(21):
-                    print "line is", x
-                    print line
-                    if x is 0:
-                        string = line
-                        print line
-                        print "Name saved and is:",  string
-                        line = next(image_file)
-                    else:
-                        valueArray.append(line.split())
-                        line = next(image_file)
-                imageTable.insert(string, valueArray)
+                if i is 0:
+                    string = line
+                    print "Name is", string
+                    i += 1
+                else:
+                    print "put line in valueArray"
+                    valueArray.append(line.split())
+
+                print line
 
         except StopIteration as ex:
             pass
