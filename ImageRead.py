@@ -4,9 +4,6 @@ Martin Sjolund
 Fredrik Ostlund
 2017-10-04
 """
-from collections import namedtuple
-from TableList import TableList
-
 class ImageRead:
 
     """
@@ -23,7 +20,7 @@ class ImageRead:
     """
     def readImage(self, file):
         """Table to have the name as key, and the array as value"""
-        imageTable = TableList()
+        imageDict = {}
         string = "empty"
         valueArray = []
 
@@ -36,8 +33,8 @@ class ImageRead:
                 if line[0] == "#" or not line.strip():
                     print "comment or empty line"
                     if i > 0:
-                        print "i>0, insert to table"
-                        imageTable.insert(string, valueArray)
+                        print "i>0, insert to dict"
+                        imageDict[string] = valueArray
                         print "insert complete"
                     i = 0
                     continue
@@ -45,6 +42,7 @@ class ImageRead:
                 """saves the image name and the 20 lines of image values"""
                 if i is 0:
                     string = line
+                    string = string[:-2]
                     print "Name is", string
                     i += 1
                 else:
@@ -57,4 +55,5 @@ class ImageRead:
             pass
 
         image_file.close()
-        return imageTable
+
+        return imageDict
