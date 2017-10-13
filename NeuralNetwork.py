@@ -5,15 +5,17 @@ Fredrik Ostlund
 2017-10-04
 """
 from ImageRead import ImageRead
+import math
 
 
-def imageLoop(training, weights):
-    xsad = 0
-    xangry = 0
-    xhappy = 0
-    xmischievous = 0
+def imageLoop(training, weights, facit):
+
 
     for x in range(200):
+        xsad = 0
+        xangry = 0
+        xhappy = 0
+        xmischievous = 0
         string = "Image" + str(x+1)
         #Titta pa varje pixel
         imagestring = "Image" + str(x + 1)
@@ -26,10 +28,44 @@ def imageLoop(training, weights):
                 xhappy = calculatexhappy(i, j, greyscale, xhappy)
                 xmischievous = calculatexmischievous(i, j, greyscale, xmischievous)
 
-    print xsad
-    print xangry
-    print xhappy
-    print xmischievous
+
+        asad = activation(xsad)
+        aangry = activation(xangry)
+        ahappy = activation(xhappy)
+        amischievous = activation(xmischievous)
+        mood = facit.get("Image" + str(x + 1))
+
+
+
+        for a in range(20):
+            for b in range(20):
+                ysad = 0
+                yangry = 0
+                yhappy = 0
+                ymischievous = 0
+
+                if mood == 1:
+                    yhappy = 1
+                elif mood == 2:
+                    ysad = 1
+                elif mood == 3:
+                    ymischievous = 1
+                elif mood == 4:
+                    yangry = 1
+
+                esad = ysad - asad
+                eangry = yangry - aangry
+                ehappy = yhappy - ahappy
+                emischievous = ymischievous - amischievous
+
+
+
+        print xsad
+        print xangry
+        print xhappy
+        print xmischievous
+
+
 
 def calculatexsad(i, j, greyscale, xsad):
     xsad = xsad + (
@@ -53,8 +89,10 @@ def calculatexmischievous(i, j, greyscale, xmischievous):
 
 
 
-"""def activation(x):
-    a = tanh(x)"""
+def activation(x):
+    return math.tanh(x)
+
+def computeerror():
 
 
 if __name__ == '__main__':
@@ -63,5 +101,8 @@ if __name__ == '__main__':
 
     weights = {}
     weights = imageRead.randomizeWeights()
-    imageLoop(training, weights)
 
+
+    facit = imageRead.readfacit('training-facit.txt')
+
+    imageLoop(training, weights)
