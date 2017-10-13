@@ -61,6 +61,23 @@ class ImageRead:
 
         return imageDict
 
+    def readfacit(self, file):
+
+        facit = {}
+        facit_file = open(file, 'r')
+
+        try:
+            for line in facit_file:
+               if line[0] == "#" or not line.strip():
+                   linestring = line.split()
+                   facit[linestring[0]] = linestring[1]
+
+        except StopIteration as ex:
+            pass
+        facit_file.close()
+
+        return facit
+
     def randomizeWeights(self):
         weightdict = {}
         """Loop through the dict and add a randomized weight"""
@@ -78,4 +95,7 @@ class ImageRead:
 
         print count
 
-        return 0
+        return weightdict
+
+
+
