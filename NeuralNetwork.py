@@ -6,6 +6,7 @@ Fredrik Ostlund
 """
 from ImageRead import ImageRead
 from Test import Test
+from random import shuffle
 import math
 
 
@@ -98,12 +99,16 @@ def calculatexmischievous(i, j, greyscale, xmischievous):
 def activation(x):
     return math.tanh(x)
 
-
+def createRandomListFromDict(dict):
+    list = dict.keys()
+    shuffle(list)
+    return list
 
 
 if __name__ == '__main__':
     imageRead = ImageRead()
     training = imageRead.readImage('training.txt')
+    keylist = createRandomListFromDict()
 
     weights = {}
     weights = imageRead.randomizeWeights()
