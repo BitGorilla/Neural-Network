@@ -30,7 +30,7 @@ class NeuralNetwork:
             imagestring = keylist[x]
             for i in range(20):
                 for j in range(20):
-                    greyscale = self.normalize(int(training.get(imagestring)[i][j]))
+                    greyscale = self.normalize(float(training.get(imagestring)[i][j]))
 
                     xsad = self.calculatexsad(i, j, greyscale, xsad)
                     xangry = self.calculatexangry(i, j, greyscale, xangry)

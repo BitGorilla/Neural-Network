@@ -27,6 +27,6 @@ if __name__ == '__main__':
         correctAnswers = test.test(facit, training, weights, keylist)
 
         print correctAnswers
-        if correctAnswers  > 40:
+        if correctAnswers > 40:
             print "done"
             running = False
