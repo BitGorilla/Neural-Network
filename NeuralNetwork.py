@@ -5,10 +5,11 @@ Fredrik Ostlund
 2017-10-04
 """
 from ImageRead import ImageRead
+from Test import Test
 import math
 
 
-def imageLoop(training, weights, facit):
+def imageLoop(training, weights, mood):
 
 
     for x in range(200):
@@ -33,39 +34,42 @@ def imageLoop(training, weights, facit):
         aangry = activation(xangry)
         ahappy = activation(xhappy)
         amischievous = activation(xmischievous)
-        mood = facit.get("Image" + str(x + 1))
 
-
-
+        facit = mood.get("Image" + str(x + 1))
         for a in range(20):
             for b in range(20):
-                ysad = 0
-                yangry = 0
-                yhappy = 0
-                ymischievous = 0
+                ysad = calcOutput(facit, "sad")
+                yangry = calcOutput(facit, "angry")
+                yhappy = calcOutput(facit, "happy")
+                ymischievous = calcOutput(facit, "mischievous")
 
-                if mood == 1:
-                    yhappy = 1
-                elif mood == 2:
-                    ysad = 1
-                elif mood == 3:
-                    ymischievous = 1
-                elif mood == 4:
-                    yangry = 1
+                wsad = computeWDiff(ysad,asad, greyscale)
+                whappy = computeWDiff(yhappy, ahappy, greyscale)
+                wangry = computeWDiff(yangry, aangry, greyscale)
+                wmischievous = computeWDiff(ymischievous, amischievous, greyscale)
 
-                esad = ysad - asad
-                eangry = yangry - aangry
-                ehappy = yhappy - ahappy
-                emischievous = ymischievous - amischievous
+                weights["sad"+str(a)+str(b)] += wsad
+                weights["happy"+str(a)+str(b)] += whappy
+                weights["angry"+str(a)+str(b)] += wangry
+                weights["mischievous"+str(a)+str(b)] += wmischievous
 
+        print weights["happy"+str(a)+str(b)]
 
+def calcOutput(facit, mood):
+    if facit == 1 and mood == "happy":
+        return 1
+    elif facit == 2 and mood == "sad":
+        return 1
+    elif facit == 3 and mood == "mischievous":
+        return 1
+    elif facit == 4 and mood == "angry":
+        return 1
+    return 0
 
-        print xsad
-        print xangry
-        print xhappy
-        print xmischievous
-
-
+def computeWDiff(y, a, x):
+    e = y - a
+    w = 0.05*e*int(x)
+    return w
 
 def calculatexsad(i, j, greyscale, xsad):
     xsad = xsad + (
@@ -88,11 +92,10 @@ def calculatexmischievous(i, j, greyscale, xmischievous):
     return xmischievous
 
 
-
 def activation(x):
     return math.tanh(x)
 
-def computeerror():
+
 
 
 if __name__ == '__main__':
@@ -105,4 +108,7 @@ if __name__ == '__main__':
 
     facit = imageRead.readfacit('training-facit.txt')
 
-    imageLoop(training, weights)
+    imageLoop(training, weights, facit)
+
+    test = Test()
+    #test.test(facit, training, weights)
