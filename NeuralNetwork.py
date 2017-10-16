@@ -8,6 +8,9 @@ from ImageRead import ImageRead
 from Test import Test
 from random import shuffle
 import math
+from decimal import Decimal
+import numpy as np
+
 
 
 def imageLoop(training, weights, mood, keylist):
@@ -97,7 +100,7 @@ def calculatexmischievous(i, j, greyscale, xmischievous):
 
 
 def activation(x):
-    return math.tanh(x)
+    return 1 / (1 + np.exp(-x))
 
 def createRandomListFromDict(dict):
     templist = dict.keys()
