@@ -93,7 +93,7 @@ class ImageRead:
                 if weightdict.get('sad' + str(x) + str(y)):
                     count += 1
 
-        print count
+        #print count
 
         return weightdict
 

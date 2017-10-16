@@ -12,7 +12,7 @@ class Test:
     def __init__(self):
         pass
 
-    def test(self, facit, images, weights):
+    def test(self, facit, images, weights, keylist):
         correctAnswers = 0
         noofimages = len(images)
         testpart = noofimages/3*1
@@ -22,7 +22,7 @@ class Test:
             happysum = 0
             angrysum = 0
             mischievoussum = 0
-            string = "Image"+str(x+noofimages-testpart+1)
+            string = keylist[noofimages-testpart+x]
 
             for y in range(20):
                 for z in range(20):
@@ -44,14 +44,15 @@ class Test:
             print mischievousvote"""
 
             answer = self.vote(happyvote, sadvote, mischievousvote, angryvote)
-            facitanswer = facit.get("Image"+str(x+noofimages-testpart+1))
-            print "Guess: %d" %answer
-            print "Correct: %s" %facitanswer
+            facitanswer = facit.get(string)
+            #print "Guess: %d" %answer
+            #print "Correct: %s" %facitanswer
 
             if int(facitanswer) == answer:
                 correctAnswers += 1
 
-        print "%d" %correctAnswers
+        #print "%d" %correctAnswers
+        return correctAnswers
 
     def activation(self, sum):
         #print sum

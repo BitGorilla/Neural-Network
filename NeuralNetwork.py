@@ -10,7 +10,7 @@ from random import shuffle
 import math
 
 
-def imageLoop(training, weights, mood):
+def imageLoop(training, weights, mood, keylist):
 
     trainingpart = len(training)/3*2
 
@@ -20,7 +20,7 @@ def imageLoop(training, weights, mood):
         xhappy = 0
         xmischievous = 0
         #Titta pa varje pixel
-        imagestring = "Image" + str(x + 1)
+        imagestring = keylist[x]
         for i in range(20):
             for j in range(20):
                 greyscale = normalize(int(training.get(imagestring)[i][j]))
@@ -36,7 +36,7 @@ def imageLoop(training, weights, mood):
         ahappy = activation(xhappy)
         amischievous = activation(xmischievous)
 
-        facit = mood.get("Image" + str(x + 1))
+        facit = mood.get(keylist[x])
         for a in range(20):
             for b in range(20):
                 ysad = calcOutput(facit, "sad")
@@ -54,7 +54,7 @@ def imageLoop(training, weights, mood):
                 weights["angry"+str(a)+str(b)] += wangry
                 weights["mischievous"+str(a)+str(b)] += wmischievous
 
-        print weights["happy"+str(a)+str(b)]
+        #print weights["happy"+str(a)+str(b)]
 
 def normalize(x):
     return x/31
@@ -100,15 +100,15 @@ def activation(x):
     return math.tanh(x)
 
 def createRandomListFromDict(dict):
-    list = dict.keys()
-    shuffle(list)
-    return list
+    templist = dict.keys()
+    shuffle(templist)
+    return templist
 
 
 if __name__ == '__main__':
+    test = Test()
     imageRead = ImageRead()
     training = imageRead.readImage('training.txt')
-    keylist = createRandomListFromDict()
 
     weights = {}
     weights = imageRead.randomizeWeights()
@@ -116,7 +116,12 @@ if __name__ == '__main__':
 
     facit = imageRead.readfacit('training-facit.txt')
 
-    imageLoop(training, weights, facit)
-
-    test = Test()
-    test.test(facit, training, weights)
+    bad = True
+    while(bad):
+        keylist = createRandomListFromDict(training)
+        imageLoop(training, weights, facit, keylist)
+        correctAnswers = test.test(facit, training, weights, keylist)
+        print correctAnswers
+        if  correctAnswers > 40:
+            bad = False
+            print "done"
