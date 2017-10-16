@@ -77,25 +77,3 @@ class ImageRead:
         facit_file.close()
 
         return facit
-
-    def randomizeWeights(self):
-        weightdict = {}
-        """Loop through the dict and add a randomized weight"""
-        for x in range(20):
-            for y in range(20):
-                weightdict['sad' + str(x) + str(y)] = random.uniform(0.4, 0.5)
-                weightdict['happy' + str(x) + str(y)] = random.uniform(0.4, 0.5)
-                weightdict['angry' + str(x) + str(y)] = random.uniform(0.4, 0.5)
-                weightdict['mischievous' + str(x) + str(y)] = random.uniform(0.4, 0.5)
-        count = 0
-        for x in range(20):
-            for y in range(20):
-                if weightdict.get('sad' + str(x) + str(y)):
-                    count += 1
-
-        #print count
-
-        return weightdict
-
-
-

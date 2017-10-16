@@ -6,6 +6,8 @@ Fredrik Ostlund
 """
 
 import math
+from decimal import Decimal
+import numpy as np
 
 class Test:
 
@@ -38,25 +40,17 @@ class Test:
             angryvote = self.activation(angrysum)
             mischievousvote = self.activation(mischievoussum)
 
-            """print sadvote
-            print happyvote
-            print angryvote
-            print mischievousvote"""
-
             answer = self.vote(happyvote, sadvote, mischievousvote, angryvote)
             facitanswer = facit.get(string)
-            #print "Guess: %d" %answer
-            #print "Correct: %s" %facitanswer
 
             if int(facitanswer) == answer:
                 correctAnswers += 1
 
-        #print "%d" %correctAnswers
         return correctAnswers
 
     def activation(self, sum):
         #print sum
-        return math.tanh(sum)
+        return (1 / (1 + np.exp(-sum)))
 
     def normalize(self, x):
         return x/31
