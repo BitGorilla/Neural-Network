@@ -71,8 +71,6 @@ class ImageRead:
                 if line[0] != "#" or not line.strip():
                     linestring = line.split()
                     facit[linestring[0]] = linestring[1].rstrip('\n')
-                    print linestring[0] +" "+ linestring[1]
-
 
         except StopIteration as ex:
             pass

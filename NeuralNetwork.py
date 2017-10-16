@@ -11,13 +11,13 @@ import math
 
 def imageLoop(training, weights, mood):
 
+    trainingpart = len(training)/3*2
 
-    for x in range(200):
+    for x in range(trainingpart):
         xsad = 0
         xangry = 0
         xhappy = 0
         xmischievous = 0
-        string = "Image" + str(x+1)
         #Titta pa varje pixel
         imagestring = "Image" + str(x + 1)
         for i in range(20):

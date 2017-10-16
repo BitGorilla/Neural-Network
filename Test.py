@@ -14,14 +14,15 @@ class Test:
 
     def test(self, facit, images, weights):
         correctAnswers = 0
+        noofimages = len(images)
+        testpart = noofimages/3*1
 
-
-        for x in range(100):
+        for x in range(testpart):
             sadsum = 0
             happysum = 0
             angrysum = 0
             mischievoussum = 0
-            string = "Image"+str(x+201)
+            string = "Image"+str(x+noofimages-testpart+1)
 
             for y in range(20):
                 for z in range(20):
@@ -43,7 +44,7 @@ class Test:
             print mischievousvote"""
 
             answer = self.vote(happyvote, sadvote, mischievousvote, angryvote)
-            facitanswer = facit.get("Image"+str(x+201))
+            facitanswer = facit.get("Image"+str(x+noofimages-testpart+1))
             print "Guess: %d" %answer
             print "Correct: %s" %facitanswer
 
