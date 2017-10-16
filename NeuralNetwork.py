@@ -22,7 +22,7 @@ def imageLoop(training, weights, mood):
         imagestring = "Image" + str(x + 1)
         for i in range(20):
             for j in range(20):
-                greyscale = training.get(imagestring)[i][j]
+                greyscale = normalize(int(training.get(imagestring)[i][j]))
 
                 xsad = calculatexsad(i, j, greyscale, xsad)
                 xangry = calculatexangry(i, j, greyscale, xangry)
@@ -54,6 +54,9 @@ def imageLoop(training, weights, mood):
                 weights["mischievous"+str(a)+str(b)] += wmischievous
 
         print weights["happy"+str(a)+str(b)]
+
+def normalize(x):
+    return x/31
 
 def calcOutput(facit, mood):
     if facit == 1 and mood == "happy":
@@ -111,4 +114,4 @@ if __name__ == '__main__':
     imageLoop(training, weights, facit)
 
     test = Test()
-    #test.test(facit, training, weights)
+    test.test(facit, training, weights)
