@@ -29,7 +29,6 @@ class Test:
             for y in range(20):
                 for z in range(20):
                     greyscale = self.normalize(float(images.get(string)[y][z]))
-                    print greyscale
 
                     sadsum += weights.get("sad"+str(y)+str(z)) * greyscale
                     happysum += weights.get("happy"+str(y)+str(z)) * greyscale
