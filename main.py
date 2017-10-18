@@ -1,7 +1,7 @@
 from Test import Test
 from ImageRead import ImageRead
 from NeuralNetwork import NeuralNetwork
-import random
+import random, sys
 
 
 def createRandomListFromDict(dict):
@@ -21,16 +21,29 @@ def randomizeWeights():
             dict['mischievous' + str(x) + str(y)] = random.uniform(0.4, 0.5)
     return dict
 
+def main():
+    if (len(sys.argv) > 1):
+        file_training = sys.argv[1]
+        file_facit = sys.argv[2]
+        file_test = sys.argv[3]
+    else:
+        file_training = "training.txt"
+        file_facit = "training-facit.txt"
+        file_test = 0
+
+    return file_training, file_facit, file_test
 
 if __name__ == '__main__':
     network = NeuralNetwork()
     test = Test()
 
+    training_images, training_facit, test_images = main()
+
     imageRead = ImageRead()
-    training = imageRead.readImage('training.txt')
+    training = imageRead.readImage(training_images)
 
 
-    facit = imageRead.readfacit('training-facit.txt')
+    facit = imageRead.readfacit(training_facit)
     weights = randomizeWeights()
 
     running = True
