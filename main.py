@@ -29,7 +29,7 @@ def main():
     else:
         file_training = "training.txt"
         file_facit = "training-facit.txt"
-        file_test = 0
+        file_test = "test-images.txt"
 
     return file_training, file_facit, file_test
 
@@ -42,7 +42,6 @@ if __name__ == '__main__':
     imageRead = ImageRead()
     training = imageRead.readImage(training_images)
 
-
     facit = imageRead.readfacit(training_facit)
     weights = randomizeWeights()
 
@@ -51,9 +50,13 @@ if __name__ == '__main__':
         keylist = createRandomListFromDict(training)
 
         weights = network.imageLoop(training, facit, keylist, weights)
-        correctAnswers = test.test(facit, training, weights, keylist)
+        correctAnswers = test.testtraining(facit, training, weights, keylist)
 
         print correctAnswers
         if correctAnswers > 80:
-            print "done"
+            print "Ready for Real Test, Let's go!"
             running = False
+
+    if test_images != 0:
+        test_dict = imageRead.readImage(test_images)
+        test.realtest(test_dict, weights)
