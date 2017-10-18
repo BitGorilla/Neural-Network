@@ -4,7 +4,6 @@ Martin Sjolund
 Fredrik Ostlund
 2017-10-04
 """
-import random
 import numpy as np
 
 class NeuralNetwork:
@@ -27,12 +26,13 @@ class NeuralNetwork:
             imagestring = keylist[x]
             for i in range(20):
                 for j in range(20):
-                    greyscale = self.normalize(float(training.get(imagestring)[i][j]))
+                    greyscale = self.normalize(training.get(imagestring)[i][j])
 
-                    xsad = self.calculatexsad(i, j, greyscale, xsad, weights)
-                    xangry = self.calculatexangry(i, j, greyscale, xangry, weights)
-                    xhappy = self.calculatexhappy(i, j, greyscale, xhappy, weights)
-                    xmischievous = self.calculatexmischievous(i, j, greyscale, xmischievous, weights)
+                    xsad += self.calculatex(i, j, greyscale, "sad", weights)
+                    xangry += self.calculatex(i, j, greyscale, "angry", weights)
+                    xhappy += self.calculatex(i, j, greyscale, "happy", weights)
+                    xmischievous += self.calculatex(i, j, greyscale,
+                                                    "mischievous", weights)
 
 
             asad = self.activation(xsad)
@@ -47,13 +47,16 @@ class NeuralNetwork:
                     yangry = self.calcOutput(facit, "angry")
                     yhappy = self.calcOutput(facit, "happy")
                     ymischievous = self.calcOutput(facit, "mischievous")
+                    #print "sad"+str(ysad) +" angry"+ str(yangry)+" happy"+str(yhappy)+" misch"+str(ymischievous)
 
                     wsad = self.computeWDiff(ysad, asad, greyscale)
                     whappy = self.computeWDiff(yhappy, ahappy, greyscale)
                     wangry = self.computeWDiff(yangry, aangry, greyscale)
                     wmischievous = self.computeWDiff(ymischievous, amischievous, greyscale)
 
+                    #print "1 "+ str(weights["sad"+str(a)+str(b)])
                     weights["sad"+str(a)+str(b)] += wsad
+                    #print "2 "+ str(weights["sad"+str(a)+str(b)])
                     weights["happy"+str(a)+str(b)] += whappy
                     weights["angry"+str(a)+str(b)] += wangry
                     weights["mischievous"+str(a)+str(b)] += wmischievous
@@ -61,7 +64,7 @@ class NeuralNetwork:
 
 
     def normalize(self,x):
-        return x/31
+        return float(x)/31
 
     def calcOutput(self,facit, mood):
         if facit == '1' and mood == "happy":
@@ -77,31 +80,14 @@ class NeuralNetwork:
 
     def computeWDiff(self, y, a, x):
         e = y - a
-        w = 0.05*e*int(x)
+        w = 0.05*e*float(x)
         return w
 
-    def calculatexsad(self, i, j, greyscale, xsad, weights):
-        xsad = xsad + (
-            weights.get("sad" + str(i) + str(j)) * int(greyscale))
-        return xsad
+    def calculatex(self, i, j, greyscale, string, weights):
+        x = weights.__getitem__(string+str(i)+str(j)) * greyscale
+        return x
 
-    def calculatexangry(self, i, j, greyscale, xangry, weights):
-        xangry = xangry + (
-            weights.get("angry" + str(i) + str(j)) * int(greyscale))
-        return xangry
-
-    def calculatexhappy(self, i, j, greyscale, xhappy, weights):
-        xhappy = xhappy + (
-            weights.get("happy" + str(i) + str(j)) * int(greyscale))
-        return xhappy
-
-    def calculatexmischievous(self, i, j, greyscale, xmischievous, weights):
-        xmischievous = xmischievous + (
-            weights.get("mischievous" + str(i) + str(j)) * int(greyscale))
-        return xmischievous
-
-
-    def activation(self,x):
+    def activation(self, x):
         return 1 / (1 + np.exp(-x))
 
 

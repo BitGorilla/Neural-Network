@@ -14,10 +14,10 @@ def randomizeWeights():
     dict = {}
     for x in range(20):
         for y in range(20):
-            dict['sad' + str(x) + str(y)] = float(random.uniform(0.4, 0.5))
-            dict['happy' + str(x) + str(y)] = float(random.uniform(0.4, 0.5))
-            dict['angry' + str(x) + str(y)] = float(random.uniform(0.4, 0.5))
-            dict['mischievous' + str(x) + str(y)] = float(random.uniform(0.4, 0.5))
+            dict['sad' + str(x) + str(y)] = random.uniform(0.4, 0.5)
+            dict['happy' + str(x) + str(y)] = random.uniform(0.4, 0.5)
+            dict['angry' + str(x) + str(y)] = random.uniform(0.4, 0.5)
+            dict['mischievous' + str(x) + str(y)] = random.uniform(0.4, 0.5)
     return dict
 
 if __name__ == '__main__':
@@ -33,6 +33,7 @@ if __name__ == '__main__':
     running = True
     while(running):
         keylist = createRandomListFromDict(training)
+        print weights
         weights = network.imageLoop(training, facit, keylist, weights)
         correctAnswers = test.test(facit, training, weights, keylist)
 

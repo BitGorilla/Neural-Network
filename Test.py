@@ -28,7 +28,7 @@ class Test:
 
             for y in range(20):
                 for z in range(20):
-                    greyscale = self.normalize(float(images.get(string)[y][z]))
+                    greyscale = self.normalize(images.get(string)[y][z])
 
                     sadsum += weights.get("sad"+str(y)+str(z)) * greyscale
                     happysum += weights.get("happy"+str(y)+str(z)) * greyscale
@@ -53,7 +53,7 @@ class Test:
         return (1 / (1 + np.exp(-sum)))
 
     def normalize(self, x):
-        return x/31
+        return float(x)/31
 
     def vote(self, a,b,c,d):
         vote = 1
