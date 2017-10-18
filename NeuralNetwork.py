@@ -22,8 +22,9 @@ class NeuralNetwork:
             xhappy = 0
             xmischievous = 0
 
-            #Titta pa varje pixel
+            """Getting which image we should check from the list of keys"""
             imagestring = keylist[x]
+            """Going through each pixel and calculating"""
             for i in range(20):
                 for j in range(20):
                     greyscale = self.normalize(training.get(imagestring)[i][j])
@@ -40,23 +41,30 @@ class NeuralNetwork:
             ahappy = self.activation(xhappy)
             amischievous = self.activation(xmischievous)
 
+            """Checking correct mood for the image and assigning a new weight to
+             every mood in each pixel"""
             facit = mood.get(keylist[x])
+
             for a in range(20):
                 for b in range(20):
+                    """The greyscale for the current pixel"""
+                    greyscale = self.normalize(training.get(imagestring)[a][b])
+
+                    """Assigning each mood 1 or 0 depending on which mood the 
+                    picture represents"""
                     ysad = self.calcOutput(facit, "sad")
                     yangry = self.calcOutput(facit, "angry")
                     yhappy = self.calcOutput(facit, "happy")
                     ymischievous = self.calcOutput(facit, "mischievous")
-                    #print "sad"+str(ysad) +" angry"+ str(yangry)+" happy"+str(yhappy)+" misch"+str(ymischievous)
 
+                    """Calculating w for each mood"""
                     wsad = self.computeWDiff(ysad, asad, greyscale)
                     whappy = self.computeWDiff(yhappy, ahappy, greyscale)
                     wangry = self.computeWDiff(yangry, aangry, greyscale)
                     wmischievous = self.computeWDiff(ymischievous, amischievous, greyscale)
 
-                    #print "1 "+ str(weights["sad"+str(a)+str(b)])
+                    """Setting new weights to each mood in the pixel"""
                     weights["sad"+str(a)+str(b)] += wsad
-                    #print "2 "+ str(weights["sad"+str(a)+str(b)])
                     weights["happy"+str(a)+str(b)] += whappy
                     weights["angry"+str(a)+str(b)] += wangry
                     weights["mischievous"+str(a)+str(b)] += wmischievous
@@ -84,34 +92,8 @@ class NeuralNetwork:
         return w
 
     def calculatex(self, i, j, greyscale, string, weights):
-        x = weights.__getitem__(string+str(i)+str(j)) * greyscale
+        x = weights.get(string + str(i) + str(j)) * greyscale
         return x
 
     def activation(self, x):
         return 1 / (1 + np.exp(-x))
-
-
-
-
-    """if __name__ == '__main__':
-        test = Test()
-        imageRead = ImageRead()
-        training = imageRead.readImage('training.txt')
-
-        weights = {}
-        weights = imageRead.randomizeWeights()
-
-
-        facit = imageRead.readfacit('training-facit.txt')
-
-        bad = True
-        rounds = 0
-        while(bad and rounds < 20):
-            keylist = createRandomListFromDict(training)
-            imageLoop(training, weights, facit, keylist)
-            correctAnswers = test.test(facit, training, weights, keylist)
-            print correctAnswers
-            if correctAnswers > 40:
-                bad = False
-                print "done"
-            rounds += 1"""

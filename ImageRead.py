@@ -59,6 +59,7 @@ class ImageRead:
 
         image_file.close()
 
+
         return imageDict
 
     def readfacit(self, file):
