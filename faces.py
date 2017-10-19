@@ -1,3 +1,9 @@
+"""
+Fundamentals of Artificial Inteligence (5DV121)
+Martin Sjolund
+Fredrik Ostlund
+2017-10-04
+"""
 from test import Test
 from image_read import ImageRead
 from neural_network import NeuralNetwork
