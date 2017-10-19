@@ -1,8 +1,8 @@
 from Test import Test
 from ImageRead import ImageRead
 from NeuralNetwork import NeuralNetwork
-import random, sys
-
+import random
+import sys
 
 def createRandomListFromDict(dict):
     templist = dict.keys()

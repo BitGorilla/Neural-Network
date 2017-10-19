@@ -4,8 +4,6 @@ Martin Sjolund
 Fredrik Ostlund
 2017-10-04
 """
-
-import random
 class ImageRead:
 
     """
@@ -33,12 +31,9 @@ class ImageRead:
             i = 0
             for line in image_file:
                 if line[0] == "#" or not line.strip():
-                    #print "comment or empty line"
                     if i > 0:
-                        #print "i>0, insert to dict"
                         imageDict[string] = valueArray
                         valueArray = []
-                        #print "insert complete"
                     i = 0
                     continue
 
@@ -46,20 +41,14 @@ class ImageRead:
                 if i is 0:
                     string = line
                     string = string.rstrip('\n')
-                    #print "Name is", string
                     i += 1
                 else:
-                    #print "put line in valueArray"
                     valueArray.append(line.split())
-
-                #print line
 
         except StopIteration as ex:
             pass
 
         image_file.close()
-
-
         return imageDict
 
     def readfacit(self, file):
@@ -75,6 +64,6 @@ class ImageRead:
 
         except StopIteration as ex:
             pass
-        facit_file.close()
 
+        facit_file.close()
         return facit

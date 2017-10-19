@@ -4,9 +4,6 @@ Martin Sjolund
 Fredrik Ostlund
 2017-10-04
 """
-
-import math
-from decimal import Decimal
 import numpy as np
 
 class Test:
@@ -84,7 +81,6 @@ class Test:
 
 
     def activation(self, sum):
-        #print sum
         return (1 / (1 + np.exp(-sum)))
 
     def normalize(self, x):
