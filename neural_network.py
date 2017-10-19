@@ -8,12 +8,23 @@ import numpy as np
 
 class NeuralNetwork:
 
+    """
+    Constructs a new "NeuralNetwork" object.
+    :return: returns nothing
+    """
     def __init__(self):
         pass
 
-
     def imageLoop(self, training, mood, keylist, weights):
-
+        """
+        Modifies the weights of the moods by comparing their answer to
+        the answer sheet.
+        :param training: the training images
+        :param mood: the answer sheet for the images
+        :param keylist: a list with the image keys randomized
+        :param weights: the pixel weights for each of the four mood
+        :return: the modified weights
+        """
         trainingpart = len(training)/3*2
 
         for x in range(trainingpart):
@@ -72,9 +83,20 @@ class NeuralNetwork:
 
 
     def normalize(self,x):
+        """
+        Normalizes a value between 0 and 31.
+        :param x: value between 0 and 31
+        :return: the normalized value
+        """
         return float(x)/31
 
     def calcOutput(self,facit, mood):
+        """
+        Sets the y-value for each mood, later used for modifying weights.
+        :param facit: the answer sheet
+        :param mood: "happy", "sad", "angry" or "mischievous"
+        :return: 1 if correct, 0 if not
+        """
         if facit == '1' and mood == "happy":
             return 1
         elif facit == '2' and mood == "sad":
@@ -87,13 +109,35 @@ class NeuralNetwork:
             return 0
 
     def computeWDiff(self, y, a, x):
+        """
+        Calculates and returns the value which to add to the weights
+        for modification.
+        :param y: 0 or 1
+        :param a: activation value
+        :param x: greyscale of the pixel
+        :return: the value to add to the weight
+        """
         e = y - a
         w = 0.05*e*float(x)
         return w
 
-    def calculatex(self, i, j, greyscale, string, weights):
-        x = weights.get(string + str(i) + str(j)) * greyscale
+    def calculatex(self, x, y, greyscale, string, weights):
+        """
+        Computes a value which to add to a sum of x values.
+        :param i: x-coordinate of pixel
+        :param j: y.coordinate of pixel
+        :param greyscale: greyscale of pixel
+        :param string: "happy", "sad", "angry" or "mischievous"
+        :param weights: the mood-weights
+        :return: the mood weight * greyscale
+        """
+        x = weights.get(string + str(x) + str(y)) * greyscale
         return x
 
     def activation(self, x):
+        """
+        Calculates and returns a activation value for x.
+        :param x: value to activate
+        :return: activated value between 0 and 1
+        """
         return 1 / (1 + np.exp(-x))

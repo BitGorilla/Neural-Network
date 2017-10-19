@@ -1,17 +1,25 @@
 from Test import Test
-from ImageRead import ImageRead
-from NeuralNetwork import NeuralNetwork
+from image_read import ImageRead
+from neural_network import NeuralNetwork
 import random
 import sys
 
 def createRandomListFromDict(dict):
+    """
+    Creates and returns a list of a shuffled dict keys.
+    :param dict: dict to shuffle
+    :return: list of shuffled dict keys
+    """
     templist = dict.keys()
     random.shuffle(templist)
     return templist
 
 
 def randomizeWeights():
-    """Loop through the dict and add a randomized weight"""
+    """
+    Creates a dict with 400 random weight values.
+    :return: dict with weights
+    """
     dict = {}
     for x in range(20):
         for y in range(20):
@@ -22,6 +30,11 @@ def randomizeWeights():
     return dict
 
 def main():
+    """
+    Read files from system input and returns them.
+    :return: three text files, training images, answer sheet and
+    test images
+    """
     if (len(sys.argv) > 1):
         file_training = sys.argv[1]
         file_facit = sys.argv[2]

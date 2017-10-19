@@ -7,18 +7,18 @@ Fredrik Ostlund
 class ImageRead:
 
     """
-    Constructs a new "ImageRead" object
+    Constructs a new "ImageRead" object.
     :return: returns nothing
     """
     def __init__(self):
         pass
 
-    """
-    Opens a textfile and reads the lines to an array
-    :param file: The text file to read from
-    :returns: an array for the Neural Network to train from
-    """
     def readImage(self, file):
+        """
+        Opens a textfile and reads the lines to an array.
+        :param file: The text file to read from
+        :return: an array for the Neural Network to train from
+        """
         """Table to have the name as key, and the array as value"""
         imageDict = {}
         string = "empty"
@@ -52,6 +52,12 @@ class ImageRead:
         return imageDict
 
     def readfacit(self, file):
+        """
+        Translates a text file with a answer sheet to a dict with the same
+        values.
+        :param file: the text file with the answer sheet
+        :return: a dict with the aswer sheet
+        """
 
         facit = {}
         facit_file = open(file, 'r')

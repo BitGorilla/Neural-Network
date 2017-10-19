@@ -7,11 +7,24 @@ Fredrik Ostlund
 import numpy as np
 
 class Test:
+    """
+      Constructs a new "NeuralNetwork" object.
+      :return: returns nothing
+      """
 
     def __init__(self):
         pass
 
     def testtraining(self, facit, images, weights, keylist):
+        """
+        Test how good the face recognition is and returns the percentage
+        of correct answers.
+        :param facit: the answer sheet
+        :param images: the training images
+        :param weights: the mood weights
+        :param keylist: a list of shuffled dict keys
+        :return: percentage of correct answers
+        """
         correctAnswers = 0
         noofimages = len(images)
         testpart = noofimages/3*1
@@ -43,10 +56,17 @@ class Test:
             if int(facitanswer) == answer:
                 correctAnswers += 1
 
-        return correctAnswers
+        return correctAnswers/testpart*100
 
 
     def realtest(self, images, weights):
+        """
+        Tests the program for real, the output is a text file with the answers
+        of the program for each image.
+        :param images: test images
+        :param weights: the mood weights
+        :return: returns nothing
+        """
         text_file = open('result.txt', 'w')
         text_file.write("#Result of image recognition test\n")
         text_file.write("#Authors: id15msd, id15fod\n")
@@ -81,12 +101,30 @@ class Test:
 
 
     def activation(self, sum):
+        """
+        Calculates and returns a activation value for x.
+        :param x: value to activate
+        :return: activated value between 0 and
+        """
         return (1 / (1 + np.exp(-sum)))
 
     def normalize(self, x):
+        """
+        Normalizes a value between 0 and 31.
+        :param x: value between 0 and 31
+        :return: the normalized value
+        """
         return float(x)/31
 
     def vote(self, a, b, c, d):
+        """
+        Finds the largest of the sums and returns the corresponding vote.
+        :param a: sum of the weights for "happy"
+        :param b: sum of the weights for "sad"
+        :param c: sum of the weights for "mischievous"
+        :param d: sum of the weights for "angry"
+        :return: the vote for the image, a value 1-4
+        """
         vote = 1
 
         if b > a:
