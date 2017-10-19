@@ -50,6 +50,10 @@ class Test:
 
 
     def realtest(self, images, weights):
+        text_file = open('result.txt', 'w')
+        text_file.write("#Result of image recognition test\n")
+        text_file.write("#Authors: id15msd, id15fod\n")
+
         for x in range(len(images)):
             sadsum = 0
             happysum = 0
@@ -72,7 +76,11 @@ class Test:
             mischievousvote = self.activation(mischievoussum)
 
             answer = self.vote(happyvote, sadvote, mischievousvote, angryvote)
-            print key + " is " + str(answer)
+
+            text_file.write(key + " " + str(answer) + "\n")
+            print key + " " + str(answer)
+
+        text_file.close()
 
 
     def activation(self, sum):
