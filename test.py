@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 """
 Fundamentals of Artificial Inteligence (5DV121)
-Martin Sjolund
-Fredrik Ostlund
+Martin Sjölund
+Fredrik Östlund
 2017-10-04
 """
 import numpy as np
@@ -69,7 +70,8 @@ class Test:
         """
         text_file = open('result.txt', 'w')
         text_file.write("#Result of image recognition test\n")
-        text_file.write("#Authors: id15msd, id15fod\n")
+        text_file.write("#Authors: Martin Sjölund (id15msd), "
+                        "Fredrik Östlund (id15fod)\n")
 
         for x in range(len(images)):
             sadsum = 0

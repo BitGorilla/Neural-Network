@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 """
 Fundamentals of Artificial Inteligence (5DV121)
-Martin Sjolund
-Fredrik Ostlund
+Martin Sjölund
+Fredrik Östlund
 2017-10-04
 """
 import numpy as np
