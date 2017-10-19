@@ -72,9 +72,9 @@ if __name__ == '__main__':
         weights = network.imageLoop(training, facit, keylist, weights)
         correctAnswers = test.testtraining(facit, training, weights, keylist)
 
-        print correctAnswers
-        if correctAnswers > 80:
-            print "Ready for Real Test, Let's go!"
+        print str(correctAnswers) + "% correctness"
+        if correctAnswers > 80.0:
+            print "Ready for a real test, let's go!\n"
             running = False
 
     if test_images != 0:

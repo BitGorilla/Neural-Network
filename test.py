@@ -57,7 +57,7 @@ class Test:
             if int(facitanswer) == answer:
                 correctAnswers += 1
 
-        return correctAnswers/testpart*100
+        return float(correctAnswers)/float(testpart)*100
 
 
     def realtest(self, images, weights):
