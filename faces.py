@@ -1,4 +1,4 @@
-from Test import Test
+from test import Test
 from image_read import ImageRead
 from neural_network import NeuralNetwork
 import random
