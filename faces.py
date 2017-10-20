@@ -66,8 +66,8 @@ if __name__ == '__main__':
     weights = randomizeWeights()
 
     running = True
-    print "///\nTraining perceptrons until desired performance criteria is " \
-          "met.\n///\n"
+    print "###\nTraining perceptrons until desired performance criteria is " \
+          "met.\n###\n"
     while(running):
         keylist = createRandomListFromDict(training)
 
@@ -76,11 +76,11 @@ if __name__ == '__main__':
 
         print str(correctAnswers) + "% correctness"
         if correctAnswers > 75.0:
-            print "\n///\nReady for a real test, let's go!\n///\n"
+            print "\n###\nReady for a real test, let's go!\n###\n"
             running = False
 
     if test_images != 0:
         test_dict = imageRead.readImage(test_images)
         test.realtest(test_dict, weights)
 
-    print "\n///\nResults are done and written to result.txt\n///"
+    print "\n###\nResults are done and written to result.txt\n###"
