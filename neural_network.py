@@ -57,17 +57,19 @@ class NeuralNetwork:
              every mood in each pixel"""
             facit = mood.get(keylist[x])
 
+            """Assigning each mood 1 or 0 depending on which mood the 
+                                picture represents"""
+            ysad = self.calcOutput(facit, "sad")
+            yangry = self.calcOutput(facit, "angry")
+            yhappy = self.calcOutput(facit, "happy")
+            ymischievous = self.calcOutput(facit, "mischievous")
+
             for a in range(20):
                 for b in range(20):
                     """The greyscale for the current pixel"""
                     greyscale = self.normalize(training.get(imagestring)[a][b])
 
-                    """Assigning each mood 1 or 0 depending on which mood the 
-                    picture represents"""
-                    ysad = self.calcOutput(facit, "sad")
-                    yangry = self.calcOutput(facit, "angry")
-                    yhappy = self.calcOutput(facit, "happy")
-                    ymischievous = self.calcOutput(facit, "mischievous")
+
 
                     """Calculating w for each mood"""
                     wsad = self.computeWDiff(ysad, asad, greyscale)
