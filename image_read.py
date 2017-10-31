@@ -65,7 +65,9 @@ class ImageRead:
 
         try:
             for line in facit_file:
-                if line[0] != "#" or not line.strip():
+                if line[0] == "#" or not line.strip():
+                    continue
+                else:
                     linestring = line.split()
                     facit[linestring[0]] = linestring[1].rstrip('\n')
 
