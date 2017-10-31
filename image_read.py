@@ -31,20 +31,23 @@ class ImageRead:
         try:
             i = 0
             for line in image_file:
-                if line[0] == "#" or not line.strip():
-                    if i > 0:
-                        imageDict[string] = valueArray
-                        valueArray = []
-                    i = 0
-                    continue
 
                 """saves the image name and the 20 lines of image values"""
-                if i is 0:
-                    string = line
-                    string = string.rstrip('\n')
-                    i += 1
+                if line[0] == "#" or not line.strip():
+                    continue
                 else:
-                    valueArray.append(line.split())
+                    if i == 0:
+                        string = line
+                        string = string.rstrip('\n')
+                        i += 1
+                    elif i == 20:
+                        valueArray.append(line.split())
+                        imageDict[string] = valueArray
+                        valueArray = []
+                        i = 0
+                    else:
+                        valueArray.append(line.split())
+                        i += 1
 
         except StopIteration as ex:
             pass
