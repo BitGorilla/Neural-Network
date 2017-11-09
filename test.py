@@ -90,6 +90,7 @@ class Test:
             mischievoussum = 0
             key = "Image" + str(x+k)
 
+
             for y in range(20):
                 for z in range(20):
                     greyscale = self.normalize(images.get(key)[y][z])
