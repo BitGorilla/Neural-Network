@@ -73,12 +73,22 @@ class Test:
         text_file.write("#Authors: Martin Sjölund (id15msd), "
                         "Fredrik Östlund (id15fod)\n")
 
+        end = False
+        k = 1
+        while not end:
+            key = "Image"+str(k)
+            try:
+                images.get(key)[0][0]
+                end = True
+            except TypeError:
+                k += 1
+
         for x in range(len(images)):
             sadsum = 0
             happysum = 0
             angrysum = 0
             mischievoussum = 0
-            key = "Image" + str(x+1)
+            key = "Image" + str(x+k)
 
             for y in range(20):
                 for z in range(20):
